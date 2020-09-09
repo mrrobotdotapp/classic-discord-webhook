@@ -1,28 +1,27 @@
-const child_process = require('child-process-promise')
-const fs = require('fs').promises
-const xml = require('xml-library')
+const child_process = require('child-process-promise'),
+	fs = require('fs').promises,
+	xml = require('xml-library');
 
-module.exports.start = test
-
-function test(skip) {
+module.exports.start = (skip) => {
 	console.log("Running 'mvn test'...")
-	var args = ["test", "-B"]
+	let args = ["test", "-B"]
 	if (skip) {
 		args.push("-DskipTests")
 	}
 
-	var maven = child_process.spawn("mvn", args, { shell: true })
+	let maven = child_process.spawn("mvn", args, { shell: true })
 
 	maven.childProcess.stdout.on('data', data => process.stdout.write(data.toString('utf8')))
 	maven.childProcess.stderr.on('data', data => process.stdout.write(data.toString('utf8')))
 	return maven.then(() => aggregate(), aggregate)
 }
 
-function aggregate(err) {
-	console.log("Aggregating test results...")
-	console.log(err);
 
-	var evaluation = {
+function aggregate(err) {
+	console.log("Aggregating test results...");
+	if (err) return console.log(err.message);
+
+	const evaluation = {
 		status: (err ? "FAILURE": "SUCCESS")
 	}
 
@@ -32,8 +31,8 @@ function aggregate(err) {
 			evaluation.coverage = results[2]
 
 			evaluation.time = evaluation.tests.length == 0 ? 0 : evaluation.tests.reduce((a, b) => {
-				var x = a.time ? parseFloat(a.time): a
-				var y = b.time ? parseFloat(b.time): b
+				let x = a.time ? parseFloat(a.time): a,
+				y = b.time ? parseFloat(b.time): b
 				return x + y
 			})
 
@@ -60,23 +59,22 @@ function getCoverage(path) {
 }
 
 function calculateCoverage(xml) {
-	var tested = []
-	var total = []
+	let tested = [],
+	    total = [];
 
-	for (var key in xml.elements) {
+	for (let key in xml.elements) {
 		if (key.startsWith("counter[")) {
-			var attributes = xml.elements[key].attributes
-			var type = attributes.type
-			var missed = parseInt(attributes.missed)
-			var covered = parseInt(attributes.covered)
+			let attributes = xml.elements[key].attributes,
+			    type = attributes.type,
+			    missed = parseInt(attributes.missed),
+			    covered = parseInt(attributes.covered);
 			console.log("COVERAGE: " + type + " - " + covered + "/" + (covered + missed))
 			tested.push(covered)
 			total.push((covered + missed))
 		}
 	}
 
-	var coverage = 100.0 * tested.reduce((a, b) => a + b) / total.reduce((a, b) => a + b)
-	return coverage.toFixed(2)
+	return coverage = 100.0 * tested.reduce((a, b) => a + b) / total.reduce((a, b) => a + b).toFixed(2);
 }
 
 function getTestResults(path) {
