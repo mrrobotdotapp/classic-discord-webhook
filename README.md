@@ -8,7 +8,7 @@ The standard webhook from GitHub to Discord just dumps the commit messages right
 
 |                                                        Standard Webhook                                                        |                                                        New and improved Webhook                                                        |
 |:------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------:|
-| ![Old webhook interface](https://user-images.githubusercontent.com/14293805/90334058-11e81900-dfcb-11ea-8de0-f01a7591254d.png) | ![New webhook interface](https://github.com/Mist3r-Robot/classic-discord-webhook/assets/14293805/f7ede24b-b902-49f4-8f89-055e9a8a0903) |
+| ![Old webhook interface](https://user-images.githubusercontent.com/14293805/90334058-11e81900-dfcb-11ea-8de0-f01a7591254d.png) | ![New webhook interface](https://github.com/mrrobotdotapp/classic-discord-webhook/assets/14293805/f7ede24b-b902-49f4-8f89-055e9a8a0903) |
 
 ## Donate
 Feel free to help [me](https://github.com/thomasbnt) for the maintenance of this project !
@@ -32,7 +32,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Run Discord Webhook
-      uses: Mist3r-Robot/classic-discord-webhook@main
+      uses: mrrobotdotapp/classic-discord-webhook@main
       with:
         id: ${{ secrets.DISCORD_WEBHOOK_ID }}
         token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
