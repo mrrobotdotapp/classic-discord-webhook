@@ -47,12 +47,11 @@ module.exports.send = (id, token, repo, branch, url, commits, size, threadId) =>
 function createEmbed (repo, branch, url, commits, size) {
   console.log('Constructing Embed...')
   console.log('Commits :')
-  console.log(commits)
-  if (!commits) {
+  const latest = commits[0]
+  if (!latest) {
     console.log('No commits, skipping...')
     return
   }
-  const latest = commits[0]
   // check if latest.author is undefined, if it is, define username as 'unknown' and avatar as null
   if (!latest.author) {
     latest.author = {

@@ -3,8 +3,12 @@ const github = require('@actions/github')
 
 const webhook = require('../src/discord.js')
 
-async function run () {
-  const payload = await github.context.payload
+function run () {
+  const id = core.getInput('id')
+  const token = core.getInput('token')
+  const threadId = core.getInput('threadId')
+
+  const payload = github.context.payload
   const repository = payload.repository.full_name
   const commits = payload.commits
   const size = commits.length
@@ -14,14 +18,10 @@ async function run () {
 
   console.log(`Received ${commits.length}/${size} commits...`)
 
-  if (commits.length === 0 || !commits) {
+  if (size === 0 || !commits) {
     console.log('No commits, skipping...')
     return
   }
-
-  const id = core.getInput('id')
-  const token = core.getInput('token')
-  const threadId = core.getInput('threadId')
 
   webhook
     .send(
