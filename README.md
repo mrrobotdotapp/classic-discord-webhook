@@ -1,12 +1,9 @@
 [![](https://img.shields.io/badge/-Github_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/marketplace/actions/classic-discord-webhook) [![Twitter Follow](https://img.shields.io/badge/Follow%20me%20on-Twitter-1DA1F2?&logo=Twitter&style=for-the-badge)](https://twitter.com/Thomasbnt_) [![Follow @mrrobot on DEV](https://img.shields.io/badge/dev.to-%2308090A.svg?&style=for-the-badge&logo=dev.to&logoColor=white&alt=devto)](https://dev.to/mrrobot)
 
-<!-- left logo and title at the right -->
-<div align="left">
+<div style="display: flex; align-items: center;">
   <img src="docs/classic_discord_webhook.png" width="100"  alt="Classic Discord Webhook logo"/>
-  <h1>Discord Webhook</h1>
+  <h1 style="margin-left: auto;">Discord Webhook</h1>
 </div>
-
-This GitHub Action can produce fancy and **more meaningful Discord messages for your commits**.
 
 ## Screenshots
 
