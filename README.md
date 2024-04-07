@@ -10,7 +10,7 @@
 The standard webhook from GitHub to Discord just dumps the commit messages right into your chat, this is fine but sometimes you just want some extra information. Did the commit introduce any new issues? Did it even compile successfully? That's what this Action is for.
 
 |              Standard Webhook               |          New and improved Webhook           |
-|:-------------------------------------------:|:-------------------------------------------:|
+| :-----------------------------------------: | :-----------------------------------------: |
 | ![Old webhook interface](docs/oldEmbed.png) | ![New webhook interface](docs/newEmbed.png) |
 
 ## Setup
@@ -44,7 +44,7 @@ in your **Settings > Security > Secrets and variables > Actions > Secrets** (/se
 - `DISCORD_WEBHOOK_TOKEN`
 
 |                                                  `DISCORD_WEBHOOK_ID`                                                  |                           `DISCORD_WEBHOOK_TOKEN`                           |                                   `DISCORD_WEBHOOK_THREAD_ID`                                   |
-|:----------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
+| :--------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
 | **Required** — This is the id of your Discord webhook, if you copy the webhook url, this will be the first part of it. | **Required** — Your Discord webhook token, it's the second part of the url. | Not required — if you want to send the message in a thread, you can specify the thread id here. |
 
 > [!NOTE]
