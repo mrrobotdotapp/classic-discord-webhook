@@ -58,6 +58,15 @@ Feel free to help the maintenance of this project ! Thanks to all **Sponsors on 
 
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor%20me-%23EA54AE.svg?&style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/thomasbnt) [![Support me on Buy Me a Coffee](https://img.shields.io/badge/Support%20me-on%20Buy%20Me%20a%20Coffee-%23FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=white)](https://www.buymeacoffee.com/thomasbnt?via=thomasbnt)
 
+## Update the Action
+
+To update the Action, we need to compile with `ncc` and push the changes to the repository.
+
+```bash
+npm install -g @vercel/ncc
+ncc build src/index.js -o dist -m
+```
+
 ### Notable documentations
 
 - [How to get Commits on GitHub](https://docs.github.com/en/rest/reference/commits#get-a-commit)
