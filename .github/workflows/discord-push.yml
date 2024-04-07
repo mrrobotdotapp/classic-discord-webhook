@@ -11,6 +11,7 @@ jobs:
         with:
           id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          #threadId: ${{ secrets.DISCORD_WEBHOOK_THREAD_ID }} # Optional
   CI:
     runs-on: ubuntu-latest
 
