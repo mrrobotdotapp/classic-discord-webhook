@@ -61,6 +61,7 @@ function createEmbed (repo, branch, url, commits, size) {
   }
   return new MessageEmbed()
     .setColor(0x00bb22)
+    .setURL(url)
     .setAuthor({
       name: `${size} ${
         size === 1 ? 'commit was ' : 'commits were'
