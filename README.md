@@ -49,6 +49,7 @@ in your **Settings > Security > Secrets and variables > Actions > Secrets** (/se
 
 > [!NOTE]
 > Need more help ? [See this post on DEV](https://dev.to/mrrobot/follow-your-repository-from-discord-52ge) or [this post on my blog in French](https://thomasbnt.dev/blog/robot-discord-basique/).
+>
 > [![follow your repository from Discord - Post on DEV](https://user-images.githubusercontent.com/14293805/198847774-bd7b38e7-5b61-4723-99a1-e767babac3a5.png)](https://dev.to/mrrobot/follow-your-repository-from-discord-52ge)
 
 ## Donate
