@@ -18,7 +18,7 @@ function run () {
 
   console.log(`Received ${commits.length}/${size} commits...`)
 
-  if (size === 0 || !commits) {
+  if (size === [] || !commits) {
     console.log('No commits, skipping...')
     return
   }
