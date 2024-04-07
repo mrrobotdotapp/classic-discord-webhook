@@ -10,7 +10,7 @@
 The standard webhook from GitHub to Discord just dumps the commit messages right into your chat, this is fine but sometimes you just want some extra information. Did the commit introduce any new issues? Did it even compile successfully? That's what this Action is for.
 
 |              Standard Webhook               |          New and improved Webhook           |
-| :-----------------------------------------: | :-----------------------------------------: |
+|:-------------------------------------------:|:-------------------------------------------:|
 | ![Old webhook interface](docs/oldEmbed.png) | ![New webhook interface](docs/newEmbed.png) |
 
 ## Setup
@@ -44,11 +44,11 @@ in your **Settings > Security > Secrets and variables > Actions > Secrets** (/se
 - `DISCORD_WEBHOOK_TOKEN`
 
 |                                                  `DISCORD_WEBHOOK_ID`                                                  |                           `DISCORD_WEBHOOK_TOKEN`                           |                                   `DISCORD_WEBHOOK_THREAD_ID`                                   |
-| :--------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
+|:----------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
 | **Required** — This is the id of your Discord webhook, if you copy the webhook url, this will be the first part of it. | **Required** — Your Discord webhook token, it's the second part of the url. | Not required — if you want to send the message in a thread, you can specify the thread id here. |
 
 > [!NOTE]
-> Need more help ? [See this post on DEV](https://dev.to/mrrobot/follow-your-repository-from-discord-52ge) or [this post on my blog in French](https://thomasbnt.dev/blog/robot-discord-basique/).
+> Need more help ? [See this post on DEV](https://dev.to/mrrobot/follow-your-repository-from-discord-52ge).
 >
 > [![follow your repository from Discord - Post on DEV](https://user-images.githubusercontent.com/14293805/198847774-bd7b38e7-5b61-4723-99a1-e767babac3a5.png)](https://dev.to/mrrobot/follow-your-repository-from-discord-52ge)
 
