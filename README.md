@@ -55,7 +55,7 @@ in your **Settings > Security > Secrets and variables > Actions > Secrets** (/se
 | :--------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
 | **Required** — This is the id of your Discord webhook, if you copy the webhook url, this will be the first part of it. | **Required** — Your Discord webhook token, it's the second part of the url. | Not required — if you want to send the message in a thread, you can specify the thread id here. |
 
-> ![NOTE]
+> [!NOTE]
 > Need more help ? [See this post on DEV](https://dev.to/mrrobot/follow-your-repository-from-discord-52ge) or [this post on my blog in French](https://thomasbnt.dev/blog/robot-discord-basique/).
 > [![follow your repository from Discord - Post on DEV](https://user-images.githubusercontent.com/14293805/198847774-bd7b38e7-5b61-4723-99a1-e767babac3a5.png)](https://dev.to/mrrobot/follow-your-repository-from-discord-52ge)
 
