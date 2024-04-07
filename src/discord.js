@@ -6,6 +6,9 @@ module.exports.send = (id, token, repo, branch, url, commits, size, threadId) =>
     let client
     console.log('Preparing Webhook...')
     try {
+      if (!id || !token) {
+        throw new Error('ID or token is missing')
+      }
       client = new WebhookClient({
         id,
         token
