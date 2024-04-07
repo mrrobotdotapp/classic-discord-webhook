@@ -70,3 +70,4 @@ ncc build src/index.js -o dist -m
 ### Notable documentations
 
 - [How to get Commits on GitHub](https://docs.github.com/en/rest/reference/commits#get-a-commit)
+- [How to Build Your First JavaScript GitHub Action](https://www.freecodecamp.org/news/build-your-first-javascript-github-action/)
