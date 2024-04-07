@@ -50,13 +50,22 @@ function createEmbed (repo, branch, url, commits, size) {
     return
   }
   const latest = commits[0]
+  // check if latest.author is undefined, if it is, define username as 'unknown' and avatar as null
+  if (!latest.author) {
+    latest.author = {
+      username: 'unknown',
+      avatar: null
+    }
+  } else {
+    latest.author.avatar = `https://github.com/${latest.author.username}.png?size=32`
+  }
   return new MessageEmbed()
     .setColor(0x00bb22)
     .setAuthor({
       name: `${size} ${
         size === 1 ? 'commit was ' : 'commits were'
       } added to ${branch}`,
-      iconURL: `https://github.com/${latest.author.username}.png?size=32`
+      iconURL: latest.author.avatar,
     })
     .setDescription(`${getChangeLog(commits, size)}`)
     .setTimestamp(Date.parse(latest.timestamp))
