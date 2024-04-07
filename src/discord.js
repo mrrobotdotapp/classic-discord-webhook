@@ -69,7 +69,7 @@ function createEmbed (repo, branch, url, commits, size) {
       name: `${size} ${
         size === 1 ? 'commit was ' : 'commits were'
       } added to ${branch}`,
-      iconURL: latest.author.avatar,
+      iconURL: latest.author.avatar
     })
     .setDescription(`${getChangeLog(commits, size)}`)
     .setTimestamp(Date.parse(latest.timestamp))
