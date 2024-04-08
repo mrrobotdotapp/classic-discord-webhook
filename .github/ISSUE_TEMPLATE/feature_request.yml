@@ -1,0 +1,23 @@
+name: "\U0001F64B Feature Request"
+description: 'Want us to add something to the project? Fill out this form!'
+labels: [ 'Feature request' ]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for suggesting a feature! Please fill out the sections below.
+  - type: textarea
+    attributes:
+      label: Summary
+      description: Clearly describe what you want to happen.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Anything else?
+  - type: dropdown
+    attributes:
+      label: Have you looked at the other exits before submitting your own?
+      options:
+        - 'Yes'
+    validations:
+      required: true
