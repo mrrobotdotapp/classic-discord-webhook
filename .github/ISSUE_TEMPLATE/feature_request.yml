@@ -1,4 +1,4 @@
-name: "\U0001F64B Feature Request"
+name: "Feature Request"
 description: 'Want us to add something to the project? Fill out this form!'
 labels: [ 'Feature request' ]
 body:
