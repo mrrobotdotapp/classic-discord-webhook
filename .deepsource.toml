@@ -2,7 +2,8 @@ version = 1
 
 [[analyzers]]
 name = "javascript"
+enabled = true
 
   [analyzers.meta]
   environment = ["nodejs"]
-  node_version = "20"
+  module_system = "es-modules"
