@@ -4,8 +4,7 @@ const WEBHOOK_ID = process.env.DISCORD_WEBHOOK_ID
 const WEBHOOK_TOKEN = process.env.DISCORD_WEBHOOK_TOKEN
 
 if (!WEBHOOK_ID || !WEBHOOK_TOKEN) {
-  console.error('Missing DISCORD_WEBHOOK_ID or DISCORD_WEBHOOK_TOKEN env vars')
-  process.exit(1)
+  throw new Error('Missing DISCORD_WEBHOOK_ID or DISCORD_WEBHOOK_TOKEN env vars')
 }
 
 async function runTest(label, commits, { repo = 'thomasbnt/classic-discord-webhook', branch = 'main', compareUrl = 'https://github.com/thomasbnt/classic-discord-webhook/compare/abc123...def456', threadId } = {}) {
