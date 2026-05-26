@@ -74,9 +74,10 @@ function getChangelog(commits) {
 
     const { id, url, message } = commits[i]
     const sha = id.substring(0, 7)
-    const subject = message.length > MAX_COMMIT_SUBJECT_LENGTH
-      ? `${message.substring(0, MAX_COMMIT_SUBJECT_LENGTH)}...`
-      : message
+    const firstLine = message.split('\n')[0]
+    const subject = firstLine.length > MAX_COMMIT_SUBJECT_LENGTH
+      ? `${firstLine.substring(0, MAX_COMMIT_SUBJECT_LENGTH)}...`
+      : firstLine
 
     changelog += `[\`${sha}\`](<${url}>) ${subject}\n`
   }
