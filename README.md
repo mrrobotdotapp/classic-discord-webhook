@@ -1,12 +1,12 @@
-# Classic Discord Webhook
+# Discord Commit Webhook
 
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Classic%20Discord%20Webhook-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/marketplace/actions/classic-discord-webhook) [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%23EA54AE?style=flat-square&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/thomasbnt) [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue?style=flat-square)](./LICENSE)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Discord%20Commit%20Webhook-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/marketplace/actions/discord-commit-webhook) [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%23EA54AE?style=flat-square&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/thomasbnt) [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue?style=flat-square)](./LICENSE)
 
-![Classic Discord Webhook](docs/classic_discord_webhook.png)
+![Discord Commit Webhook](docs/classic_discord_webhook.png)
 
 > A GitHub Action that sends a clean, structured Discord notification on every push — using Discord **Components v2**.
 
-| Standard GitHub webhook | Classic Discord Webhook |
+| Standard GitHub webhook | Discord Commit Webhook |
 | :---------------------: | :---------------------: |
 | ![Old webhook interface](docs/oldEmbed.png) | ![New webhook interface](docs/newEmbed.png) |
 
