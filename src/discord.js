@@ -13,6 +13,9 @@ export async function send(id, token, repo, branch, compareUrl, commits, threadI
   const url = new URL(`${DISCORD_WEBHOOK_BASE}/${id}/${token}`)
   url.searchParams.set('with_components', 'true')
   if (threadId) {
+    if (!/^\d+$/.test(threadId)) {
+      throw new Error(`threadId must be a numeric Discord snowflake, got: "${threadId}"`)
+    }
     url.searchParams.set('thread_id', threadId)
   }
 
