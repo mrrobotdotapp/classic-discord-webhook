@@ -1,4 +1,4 @@
-name: 'Classic Discord Webhook'
+name: 'Send Discord message'
 description: 'Send a formatted Discord notification on every push — commit links, branch, author, and changelog using Discord Components v2.'
 branding:
   icon: git-commit
