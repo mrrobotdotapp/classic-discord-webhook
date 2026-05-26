@@ -2,10 +2,14 @@
   "extends": "eslint:recommended",
   "env": {
     "node": true,
-    "es6": true
+    "es2022": true
   },
   "parserOptions": {
-    "ecmaVersion": 2021
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "globals": {
+    "fetch": "readonly"
   },
   "rules": {
     "semi": 0,
@@ -13,7 +17,6 @@
     "comma-spacing": "error",
     "comma-style": "error",
     "dot-location": ["error", "property"],
-    "handle-callback-err": "off",
     "keyword-spacing": "error",
     "max-nested-callbacks": ["error", { "max": 4 }],
     "max-statements-per-line": ["error", { "max": 2 }],

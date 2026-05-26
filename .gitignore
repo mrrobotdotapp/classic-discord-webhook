@@ -129,6 +129,10 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# IDE
+# IDE & editor agents
 .idea/
 .vscode/
+.claude/
+
+# dist is intentionally committed for the GitHub Action runner
+!dist/index.js
