@@ -2,12 +2,10 @@
 
 ## Supported Versions
 
-
-| Version | Supported          |
-|---------|--------------------|
-| main    | :white_check_mark: |
-| <1.5.0  | :x:                |
+Only the latest commit on `main` is actively maintained.
 
 ## Reporting a Vulnerability
 
-You can report a vulnerability by opening an issue or by contacting the maintainer directly on the [Discord server](https://mrrobot.app/discord).
+Please report vulnerabilities via [GitHub Security Advisories](https://github.com/mrrobotdotapp/classic-discord-webhook/security/advisories/new) rather than opening a public issue.
+
+You can also contact the maintainer on the [Discord server](https://mrrobot.app/discord).

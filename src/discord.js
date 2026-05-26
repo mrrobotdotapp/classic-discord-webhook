@@ -1,99 +1,85 @@
-const { MessageEmbed, WebhookClient } = require('discord.js')
-const MAX_MESSAGE_LENGTH = 40
+import { info } from '@actions/core'
 
-module.exports.send = (id, token, repo, branch, url, commits, size, threadId) =>
-  new Promise((resolve, reject) => {
-    let client
-    console.log('Preparing Webhook...')
-    try {
-      if (!id || !token) {
-        throw new Error('ID or token is missing')
-      }
-      client = new WebhookClient({
-        id,
-        token
-      })
+const DISCORD_WEBHOOK_BASE = 'https://discord.com/api/webhooks'
+const MAX_COMMIT_SUBJECT_LENGTH = 72
+const MAX_COMMITS_DISPLAYED = 8
+const EMBED_COLOR = 0x00bb22
 
-      if (threadId) {
-        if (isNaN(threadId)) {
-          throw new Error('threadId is not a number')
-        }
-        console.log('Found thread ID')
-        client
-          .send({
-            embeds: [createEmbed(repo, branch, url, commits, size)],
-            threadId
-          })
-          .then(() => {
-            console.log('Successfully sent the message!')
-            resolve()
-          }, reject)
-      } else {
-        client
-          .send({
-            embeds: [createEmbed(repo, branch, url, commits, size)]
-          })
-          .then(() => {
-            console.log('Successfully sent the message!')
-            resolve()
-          }, reject)
-      }
-    } catch (error) {
-      console.log('Error creating Webhook')
-      reject(error.message)
+export async function send(id, token, repo, branch, compareUrl, commits, threadId) {
+  if (!id || !token) {
+    throw new Error('Webhook ID or token is missing')
+  }
+
+  const url = new URL(`${DISCORD_WEBHOOK_BASE}/${id}/${token}`)
+  url.searchParams.set('with_components', 'true')
+  if (threadId) {
+    if (!/^\d+$/.test(threadId)) {
+      throw new Error(`threadId must be a numeric Discord snowflake, got: "${threadId}"`)
     }
+    url.searchParams.set('thread_id', threadId)
+  }
+
+  info('Sending to Discord...')
+
+  const response = await fetch(url.toString(), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(createPayload(repo, branch, compareUrl, commits))
   })
 
-function createEmbed (repo, branch, url, commits, size) {
-  console.log('Constructing Embed...')
-  console.log('Commits :')
-  const latest = commits[0]
-  console.log({ latest })
-  if (!latest) {
-    console.log('No commits, skipping...')
-    return
+  if (!response.ok) {
+    const body = await response.text()
+    throw new Error(`Discord API error ${response.status}: ${body}`)
   }
-  // check if latest.author is undefined, if it is, define username as 'unknown' and avatar as null
-  if (!latest.author) {
-    latest.author = {
-      username: 'unknown',
-      avatar: null
-    }
-  } else {
-    latest.author.avatar = `https://github.com/${latest.author.username}.png?size=32`
-  }
-  return new MessageEmbed()
-    .setColor(0x00bb22)
-    .setURL(url)
-    .setAuthor({
-      name: `${size} ${
-        size === 1 ? 'commit was' : 'commits were'
-      } added to ${branch}`,
-      iconURL: latest.author.avatar,
-    })
-    .setDescription(`${getChangeLog(commits, size)}`)
-    .setTimestamp(Date.parse(latest.timestamp))
-    .setFooter({
-      text: `⚡ Edited by @${latest.author.username}`
-    })
+
+  info('Message sent successfully!')
 }
 
-function getChangeLog (commits, size) {
+function createPayload(repo, branch, compareUrl, commits) {
+  const size = commits.length
+  const latest = commits[0]
+  const authorUsername = latest.author?.username ?? 'unknown'
+
+  return {
+    flags: 1 << 15,
+    components: [{
+      type: 17,
+      accent_color: EMBED_COLOR,
+      components: [
+        {
+          type: 10,
+          content: `### [${size} ${size === 1 ? 'commit' : 'commits'} pushed to **${branch}**](<${compareUrl}>)`
+        },
+        {
+          type: 10,
+          content: getChangelog(commits)
+        },
+        {
+          type: 10,
+          content: `-# By @${authorUsername} · ${repo}`
+        }
+      ]
+    }]
+  }
+}
+
+function getChangelog(commits) {
   let changelog = ''
-  for (const i in commits) {
-    if (i > 7) {
-      changelog += `+ ${size - i} more...\n`
+
+  for (let i = 0; i < commits.length; i++) {
+    if (i >= MAX_COMMITS_DISPLAYED) {
+      changelog += `+ ${commits.length - i} more...`
       break
     }
 
-    const commit = commits[i]
-    const sha = commit.id.substring(0, 6)
-    const message =
-      commit.message.length > MAX_MESSAGE_LENGTH
-        ? commit.message.substring(0, MAX_MESSAGE_LENGTH) + '...'
-        : commit.message
-    changelog += `[\`${sha}\`](${commit.url}) — ${message}\n`
+    const { id, url, message } = commits[i]
+    const sha = id.substring(0, 7)
+    const subject = message.length > MAX_COMMIT_SUBJECT_LENGTH
+      ? `${message.substring(0, MAX_COMMIT_SUBJECT_LENGTH)}...`
+      : message
+
+    changelog += `[\`${sha}\`](<${url}>) ${subject}\n`
   }
 
-  return changelog
+  return changelog.trimEnd()
 }

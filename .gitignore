@@ -89,7 +89,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/
@@ -129,6 +128,11 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# IDE
+# IDE & editor agents
 .idea/
 .vscode/
+.claude/
+
+# dist/* is ignored except index.js which the GitHub Actions runner executes directly
+dist/*
+!dist/index.js

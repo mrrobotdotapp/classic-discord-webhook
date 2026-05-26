@@ -1,10 +1,12 @@
 {
   "name": "classic-discord-webhook",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "This GitHub Action can produce fancy and more meaningful discord messages for your commits.",
-  "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "esbuild src/index.js --bundle --platform=node --target=node20 --format=cjs --outfile=dist/index.js --minify",
+    "test": "node tests/test.js",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -23,10 +25,13 @@
   },
   "homepage": "https://github.com/mrrobotdotapp/classic-discord-webhook#readme",
   "dependencies": {
-    "@actions/core": "1.10.1",
-    "@actions/github": "^6.0.0",
-    "discord.js": "^13.6.0",
-    "child-process-promise": "^2.2.1",
-    "xml-library": "0.2.0"
+    "@actions/core": "^3.0.1",
+    "@actions/github": "^9.1.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
+    "esbuild": "^0.28.0",
+    "husky": "^9.1.7"
   }
 }

@@ -1,44 +1,25 @@
-const core = require('@actions/core')
-const github = require('@actions/github')
+import { getInput, info, setFailed } from '@actions/core'
+import { context } from '@actions/github'
+import { send } from './discord.js'
 
-const webhook = require('../src/discord.js')
+async function run() {
+  const id = getInput('id')
+  const token = getInput('token')
+  const threadId = getInput('threadId') || undefined
 
-function run () {
-  const id = core.getInput('id')
-  const token = core.getInput('token')
-  const threadId = core.getInput('threadId')
-
-  const payload = github.context.payload
+  const { payload } = context
   const repository = payload.repository.full_name
-  const commits = payload.commits
-  const size = commits.length
-  const branch = payload.ref.split('/')[payload.ref.split('/').length - 1]
+  const commits = payload.commits ?? []
+  const branch = payload.ref.split('/').pop()
 
-  console.log('Received payload.')
+  info(`Received ${commits.length} commit(s) on ${branch}`)
 
-  console.log(`Received ${size} commits...`)
-
-  if (!commits[0]) {
-    console.log('No commits, skipping...')
+  if (commits.length === 0) {
+    info('No commits, skipping.')
     return
   }
 
-  webhook
-    .send(
-      id,
-      token,
-      repository,
-      branch,
-      payload.compare,
-      commits,
-      size,
-      threadId
-    )
-    .catch((err) => core.setFailed(err.message))
+  await send(id, token, repository, branch, payload.compare, commits, threadId)
 }
 
-try {
-  run()
-} catch (error) {
-  core.setFailed(error.message)
-}
+run().catch((error) => setFailed(error.message))

@@ -1,18 +1,18 @@
 name: 'Classic Discord Webhook'
-description: 'This GitHub Action sends simple discord messages for your commits.'
+description: 'Send a formatted Discord notification on every push — commit links, branch, author, and changelog using Discord Components v2.'
 branding:
   icon: git-commit
   color: blue
 
 inputs:
   id:
-    description: The Discord Webhook ID
+    description: 'Discord webhook ID — the first segment of the webhook URL (discord.com/api/webhooks/{ID}/{TOKEN})'
     required: true
   token:
-    description: The Discord Webhook Token
+    description: 'Discord webhook token — the second segment of the webhook URL'
     required: true
   threadId:
-    description: If you want to send the embed message in a specific thread
+    description: 'Send the message to a specific thread inside the webhook channel (Discord thread snowflake ID)'
     required: false
 
 runs:
