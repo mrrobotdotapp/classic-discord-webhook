@@ -1,6 +1,6 @@
 name: "Feature Request"
-description: 'Want us to add something to the project? Fill out this form!'
-labels: [ 'Feature request' ]
+description: "Want something added to the project? Fill out this form."
+labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
@@ -11,13 +11,14 @@ body:
       description: Clearly describe what you want to happen.
     validations:
       required: true
+  - type: dropdown
+    attributes:
+      label: Have you checked existing issues?
+      description: Make sure there's no duplicate request already open.
+      options:
+        - "Yes, I checked"
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Anything else?
-  - type: dropdown
-    attributes:
-      label: Have you looked at the other exits before submitting your own?
-      options:
-        - 'Yes'
-    validations:
-      required: true
