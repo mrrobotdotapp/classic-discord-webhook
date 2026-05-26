@@ -1,4 +1,4 @@
-import * as core from '@actions/core'
+import { info } from '@actions/core'
 
 const DISCORD_WEBHOOK_BASE = 'https://discord.com/api/webhooks'
 const MAX_COMMIT_SUBJECT_LENGTH = 72
@@ -19,7 +19,7 @@ export async function send(id, token, repo, branch, compareUrl, commits, threadI
     url.searchParams.set('thread_id', threadId)
   }
 
-  core.info('Sending to Discord...')
+  info('Sending to Discord...')
 
   const response = await fetch(url.toString(), {
     method: 'POST',
@@ -32,7 +32,7 @@ export async function send(id, token, repo, branch, compareUrl, commits, threadI
     throw new Error(`Discord API error ${response.status}: ${body}`)
   }
 
-  core.info('Message sent successfully!')
+  info('Message sent successfully!')
 }
 
 function createPayload(repo, branch, compareUrl, commits) {
