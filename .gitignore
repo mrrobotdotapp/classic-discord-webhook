@@ -89,7 +89,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/
@@ -134,5 +133,6 @@ dist
 .vscode/
 .claude/
 
-# dist is intentionally committed for the GitHub Action runner
+# dist/* is ignored except index.js which the GitHub Actions runner executes directly
+dist/*
 !dist/index.js
