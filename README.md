@@ -1,73 +1,81 @@
-[![](https://img.shields.io/badge/-Github_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/marketplace/actions/classic-discord-webhook) [![Twitter Follow](https://img.shields.io/badge/Follow%20me%20on-Twitter-1DA1F2?&logo=Twitter&style=for-the-badge)](https://twitter.com/Thomasbnt_) [![Follow @mrrobot on DEV](https://img.shields.io/badge/dev.to-%2308090A.svg?&style=for-the-badge&logo=dev.to&logoColor=white&alt=devto)](https://dev.to/mrrobot)
+# Classic Discord Webhook
 
-![Classic Discord Webhook](docs/classic_discord_webhook.png#gh-light-mode-only)
-![Classic Discord Webhook](docs/classic_discord_webhook-dark.png#gh-dark-mode-only)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Classic%20Discord%20Webhook-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/marketplace/actions/classic-discord-webhook) [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%23EA54AE?style=flat-square&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/thomasbnt) [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue?style=flat-square)](./LICENSE)
 
-[![Github Sponsors](https://cdn.jsdelivr.net/gh/thomasbnt/sponsors@main/sponsors.svg)](https://github.com/sponsors/thomasbnt)
+![Classic Discord Webhook — light](docs/classic_discord_webhook.png#gh-light-mode-only)
+![Classic Discord Webhook — dark](docs/classic_discord_webhook-dark.png#gh-dark-mode-only)
 
-## Screenshots
+> A GitHub Action that sends a clean, structured Discord notification on every push — using Discord **Components v2**.
 
-The standard webhook from GitHub to Discord just dumps the commit messages right into your chat, this is fine but sometimes you just want some extra information. Did the commit introduce any new issues? Did it even compile successfully? That's what this Action is for.
-
-|              Standard Webhook               |          New and improved Webhook           |
-|:-------------------------------------------:|:-------------------------------------------:|
+| Standard GitHub webhook | Classic Discord Webhook |
+| :---------------------: | :---------------------: |
 | ![Old webhook interface](docs/oldEmbed.png) | ![New webhook interface](docs/newEmbed.png) |
 
-## Setup
+The default GitHub→Discord integration dumps raw commit messages into chat. This Action formats them into a structured message with clickable commit links, branch name, author, and a changelog capped at 8 entries.
 
-Setup this code on your repository's `.github/workflows/` in a file like `discord-push.yml` and push the changes:
+---
+
+## Quick start
 
 ```yml
+# .github/workflows/discord-push.yml
 name: Discord Webhook
+
 on: [push]
+
 jobs:
-  Discord_notification:
+  notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Run Discord Webhook
-        uses: mrrobotdotapp/classic-discord-webhook@main
+      - uses: actions/checkout@v4
+      - uses: mrrobotdotapp/classic-discord-webhook@main
         with:
           id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
-          #threadId: ${{ secrets.DISCORD_WEBHOOK_THREAD_ID }} # Optional
 ```
 
-You can see the example file at [/.github/workflows/discord-push.yml](/.github/workflows/discord-push.yml)
+## Setup
+
+### 1. Create a Discord webhook
+
+In your Discord server: **Server Settings → Integrations → Webhooks → New Webhook → Copy URL**.
+
+The URL looks like this:
+
+```text
+https://discord.com/api/webhooks/{ID}/{TOKEN}
+```
+
+### 2. Add secrets to your repository
+
+Go to Settings → Security → Secrets and variables → Actions → New repository secret:
+
+| Secret | Value |
+| --- | --- |
+| `DISCORD_WEBHOOK_ID` | The `{ID}` part of the webhook URL |
+| `DISCORD_WEBHOOK_TOKEN` | The `{TOKEN}` part of the webhook URL |
+
+### 3. Add the workflow
+
+Create `.github/workflows/discord-push.yml` with the snippet from [Quick start](#quick-start) above.
+
+> [!NOTE]
+> Need more help? [See this post on DEV](https://dev.to/mrrobot/follow-your-repository-from-discord-52ge).
+
+---
 
 ## Inputs
 
-in your **Settings > Security > Secrets and variables > Actions > Secrets** (/settings/secrets/actions) on GitHub, you need to add 2 secrets :
+| Input | Required | Description |
+| --- | --- | --- |
+| `id` | **Yes** | Discord webhook ID — first part of the webhook URL |
+| `token` | **Yes** | Discord webhook token — second part of the webhook URL |
+| `threadId` | No | Send the message to a specific thread in the webhook's channel |
 
-- `DISCORD_WEBHOOK_ID`
-- `DISCORD_WEBHOOK_TOKEN`
+---
 
-|                                                  `DISCORD_WEBHOOK_ID`                                                  |                           `DISCORD_WEBHOOK_TOKEN`                           |                                   `DISCORD_WEBHOOK_THREAD_ID`                                   |
-|:----------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
-| **Required** — This is the id of your Discord webhook, if you copy the webhook url, this will be the first part of it. | **Required** — Your Discord webhook token, it's the second part of the url. | Not required — if you want to send the message in a thread, you can specify the thread id here. |
+## Sponsors
 
-> [!NOTE]
-> Need more help ? [See this post on DEV](https://dev.to/mrrobot/follow-your-repository-from-discord-52ge).
->
-> [![follow your repository from Discord - Post on DEV](https://user-images.githubusercontent.com/14293805/198847774-bd7b38e7-5b61-4723-99a1-e767babac3a5.png)](https://dev.to/mrrobot/follow-your-repository-from-discord-52ge)
+[![GitHub Sponsors](https://cdn.jsdelivr.net/gh/thomasbnt/sponsors@main/sponsors.svg)](https://github.com/sponsors/thomasbnt)
 
-## Donate
-
-Feel free to help the maintenance of this project ! Thanks to all **Sponsors on GitHub** !
-
-[![GitHub Sponsors](https://img.shields.io/badge/Sponsor%20me-%23EA54AE.svg?&style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/thomasbnt) [![Support me on Buy Me a Coffee](https://img.shields.io/badge/Support%20me-on%20Buy%20Me%20a%20Coffee-%23FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=white)](https://www.buymeacoffee.com/thomasbnt?via=thomasbnt)
-
-## Update the Action
-
-To update the Action, we need to compile with `ncc` and push the changes to the repository.
-
-```bash
-npm install -g @vercel/ncc
-ncc build src/index.js -o dist -m
-```
-
-### Notable documentations
-
-- [How to get Commits on GitHub](https://docs.github.com/en/rest/reference/commits#get-a-commit)
-- [How to Build Your First JavaScript GitHub Action](https://www.freecodecamp.org/news/build-your-first-javascript-github-action/)
+[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor%20me-%23EA54AE?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/thomasbnt) [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-%23FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/thomasbnt?via=thomasbnt)
