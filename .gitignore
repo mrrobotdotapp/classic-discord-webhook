@@ -133,6 +133,6 @@ out
 .vscode/
 .claude/
 
-# dist/* is ignored except index.js which the GitHub Actions runner executes directly
+# dist/* is ignored except index.cjs which the GitHub Actions runner executes directly
 dist/*
-!dist/index.js
+!dist/index.cjs
