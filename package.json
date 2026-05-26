@@ -4,7 +4,7 @@
   "description": "This GitHub Action can produce fancy and more meaningful discord messages for your commits.",
   "type": "module",
   "scripts": {
-    "build": "esbuild src/index.js --bundle --platform=node --target=node20 --format=cjs --outfile=dist/index.js --minify",
+    "build": "esbuild src/index.js --bundle --platform=node --target=node20 --format=cjs --outfile=dist/index.cjs --minify",
     "test": "node tests/test.js",
     "prepare": "husky"
   },
