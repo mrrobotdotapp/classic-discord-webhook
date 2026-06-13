@@ -31,6 +31,7 @@ jobs:
         with:
           id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          # username: 'My Bot'   # optional — overrides the webhook's default display name
 ```
 
 ## Setup
