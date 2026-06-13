@@ -14,6 +14,9 @@ inputs:
   threadId:
     description: 'Send the message to a specific thread inside the webhook channel (Discord thread snowflake ID)'
     required: false
+  username:
+    description: 'Override the default webhook username displayed in Discord'
+    required: false
 
 runs:
   using: 'node24'

@@ -6,6 +6,7 @@ async function run() {
   const id = getInput('id')
   const token = getInput('token')
   const threadId = getInput('threadId') || undefined
+  const username = getInput('username') || undefined
 
   const { payload } = context
   const repository = payload.repository.full_name
@@ -19,7 +20,7 @@ async function run() {
     return
   }
 
-  await send(id, token, repository, branch, payload.compare, commits, threadId)
+  await send(id, token, repository, branch, payload.compare, commits, threadId, username)
 }
 
 run().catch((error) => setFailed(error.message))

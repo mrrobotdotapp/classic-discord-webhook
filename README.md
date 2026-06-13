@@ -70,6 +70,7 @@ Create `.github/workflows/discord-push.yml` with the snippet from [Quick start](
 | `id` | **Yes** | Discord webhook ID — first part of the webhook URL |
 | `token` | **Yes** | Discord webhook token — second part of the webhook URL |
 | `threadId` | No | Send the message to a specific thread in the webhook's channel |
+| `username` | No | Override the webhook's default display name in Discord |
 
 ---
 

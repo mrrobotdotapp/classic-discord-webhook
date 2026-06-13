@@ -5,7 +5,7 @@ const MAX_COMMIT_SUBJECT_LENGTH = 72
 const MAX_COMMITS_DISPLAYED = 8
 const EMBED_COLOR = 0x00bb22
 
-export async function send(id, token, repo, branch, compareUrl, commits, threadId) {
+export async function send(id, token, repo, branch, compareUrl, commits, threadId, username) {
   if (!id || !token) {
     throw new Error('Webhook ID or token is missing')
   }
@@ -24,7 +24,7 @@ export async function send(id, token, repo, branch, compareUrl, commits, threadI
   const response = await fetch(url.toString(), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(createPayload(repo, branch, compareUrl, commits))
+    body: JSON.stringify(createPayload(repo, branch, compareUrl, commits, username))
   })
 
   if (!response.ok) {
@@ -35,12 +35,13 @@ export async function send(id, token, repo, branch, compareUrl, commits, threadI
   info('Message sent successfully!')
 }
 
-function createPayload(repo, branch, compareUrl, commits) {
+function createPayload(repo, branch, compareUrl, commits, username) {
   const size = commits.length
   const latest = commits[0]
   const authorUsername = latest.author?.username ?? 'unknown'
 
   return {
+    ...(username && { username }),
     flags: 1 << 15,
     components: [{
       type: 17,
